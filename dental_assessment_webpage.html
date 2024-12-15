@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Dentest</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+
+    <style>
+      item-list{
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      item{
+        border-color: black;
+        display: flex;
+        align-items: center;
+        height: 60px;
+        
+      }
+
+      .item-el{
+        height: 50px;
+
+      }
+
+      img{
+      }
+    </style>
+</head>
+<body>
+
+    <div>Upload photo</div><br>
+    <input id = "teeth-photo" type="file" placeholder="teeth" accept="images/png, image/jpeg" multiple>
+    <br><br>
+    <div class="preview" style="display: flex; flex-direction: column; align-items: flex-start;">
+      </div>
+    <br><br>
+    <button id = "submit">Submit</button>
+    <br><br>
+    Please upload a photo of your teeth showing clearly where you think there is a problem
+
+
+
+    <br><br>
+    <div style="position: fixed; bottom: 10px; left: 5px; ">Disclaimer: The uplaoded photos may be used to improve the accuracy of the test. </div>
+
+
+
+    
+</body>
+<script src='main.js'></script>
+
+
+
+</html>
