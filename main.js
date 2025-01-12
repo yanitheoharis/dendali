@@ -1,26 +1,57 @@
-const fileSelector = document.querySelector("#teeth-photo");
+const fileSelector = document.querySelector("#teeth-photos");
 const submit_button = document.querySelector("#submit")
 const preview = document.querySelector(".preview")
 
 
 
 
-
 const getSize = (item) => {
-  if (item<1e3){
+  if (item < 1e3) {
     return `${item} Bytes`
   }
-  else if (item <1e6) {
-    return `${Math.round((item/1e3)*10)/10} KBytes`
-  } 
-  else if (item <1e9){
-    return `${Math.round((item/1e6)*10)/10} MBytes`
+  else if (item < 1e6) {
+    return `${Math.round((item / 1e3) * 10) / 10} KBytes`
+  }
+  else if (item < 1e9) {
+    return `${Math.round((item / 1e6) * 10) / 10} MBytes`
 
   }
 }
 
 
+submit_button.addEventListener('click', async (event) => {
 
+
+  const formData = new FormData();
+  // Add data to the FormData object
+  formData.append('username', 'John Doe');
+  formData.append('password', 'randompwd')
+  formData.append('files', fileSelector.files)
+  // get the data that were attached
+  console.log("sending axios request")
+
+  console.log(fileSelector.files)
+
+
+  for (let file of fileSelector.files) {
+    try {
+
+      const arrBuffer = await file.arrayBuffer() // buffer array containing raw binary data
+      //const objToSend = {"filename": file.name, "bytedata": arrBuffer}
+      //const bytes = new Uint8Array(arrBuffer) // convert every 8 bits to integer
+      //console.log("Trying to send...", objToSend.filename, arrBuffer)
+      const response = await axios.post("http://localhost:8000/upload", arrBuffer);
+
+
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+
+  }
+
+
+})
 
 fileSelector.addEventListener('change', async (event) => {
 
@@ -30,12 +61,13 @@ fileSelector.addEventListener('change', async (event) => {
   const selectedFiles = fileSelector.files  //object "FileList" w/list of selected files
 
   if (selectedFiles.length == 0) {
-    // If no files, show "no files selected"
+    // If no files, show "no files selected" - this is already provided by default, is it needed here?
 
-    const noFilesEl = document.createElement("#no-files")
+    /*
+    const noFilesEl = document.createElement("no-files")
     noFilesEl.innerHTML = "No files selected"
     preview.append(noFilesEl)
-
+    */
 
   } else {  // files were selected
 
@@ -59,6 +91,10 @@ fileSelector.addEventListener('change', async (event) => {
       let img = document.createElement("img");
       img.className = "item-el"
       img.src = URL.createObjectURL(file);
+
+      img.onload = () => {
+        console.log("Onload", img.naturalHeight, img.naturalWidth)
+      }
       newItem.appendChild(img)
 
 
