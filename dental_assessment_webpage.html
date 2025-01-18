@@ -38,7 +38,7 @@
 
   <div style="border: solid black;">Upload photo<br>
 
-    <form enctype="multipart/form-data">
+    <form>
 
       <input id="teeth-photos" type="file" placeholder="teeth" accept="images/png, image/jpeg" multiple>
 
@@ -46,8 +46,10 @@
       <div class="preview" style="display: flex; flex-direction: column; align-items: flex-start;">
       </div>
 
+      <input id="email" type="email" placeholder="Enter your email">
 
-      <button type="button" id="submit">Submit</button>
+      <br>
+      <button type="button" id="submit" disabled>Submit</button>
       Please upload a photo of your teeth showing clearly where you think there is a problem
     </form>
 
